@@ -5,7 +5,7 @@ use crate::geometry::{
     ColliderHandle, ColliderParent, ColliderPosition, ColliderShape, ColliderType,
 };
 use crate::math::Real;
-use parry::query::{NonlinearRigidMotion, QueryDispatcher};
+use parry::query::{NonlinearRigidMotion, QueryDispatcher, Unsupported};
 
 #[derive(Copy, Clone, Debug)]
 pub struct TOIEntry {
@@ -147,6 +147,18 @@ impl TOIEntry {
                 end_time,
                 stop_at_penetration,
             )
+            .or_else(|Unsupported| {
+                // Fall back on linear TOI if nonlinear TOI isn't supported
+                let pos12 = motion_c1.position_at_time(start_time).inverse()
+                    * motion_c2.position_at_time(start_time);
+                query_dispatcher.time_of_impact(
+                    &pos12,
+                    &(linvel2 - linvel1),
+                    co_shape1.as_ref(),
+                    co_shape2.as_ref(),
+                    end_time - start_time,
+                )
+            })
             .ok();
 
         let toi = res_toi??;
