@@ -2,6 +2,7 @@
 
 pub use self::broad_phase::BroadPhase;
 pub use self::broad_phase_multi_sap::{BroadPhaseMultiSap, BroadPhasePairEvent, ColliderPair};
+pub use self::broad_phase_sieve_tree::BroadPhaseSieveTree;
 pub use self::collider::{Collider, ColliderBuilder};
 pub use self::collider_components::*;
 pub use self::collider_set::ColliderSet;
@@ -206,6 +207,7 @@ mod narrow_phase;
 
 mod broad_phase;
 mod broad_phase_qbvh;
+mod broad_phase_sieve_tree;
 mod collider;
 mod collider_set;
 mod mesh_converter;

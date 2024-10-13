@@ -43,6 +43,7 @@ serde-serialize = [
     "dep:serde",
     "bit-vec/serde",
     "arrayvec/serde",
+    "sieve-tree/serde",
 ]
 enhanced-determinism = ["simba/libm_force", "parry2d/enhanced-determinism"]
 debug-render = []
@@ -84,6 +85,7 @@ bitflags = "2"
 log = "0.4"
 ordered-float = "4"
 thiserror = "1"
+sieve-tree = { git = "https://github.com/Ralith/sieve-tree", rev = "bfc9ad5b8ccd45e1f807ada4cfe9f2659714ee1e" }
 
 [dev-dependencies]
 bincode = "1"
