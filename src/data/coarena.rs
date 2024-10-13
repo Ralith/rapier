@@ -1,7 +1,7 @@
 use crate::data::arena::Index;
 
 #[cfg_attr(feature = "serde-serialize", derive(Serialize, Deserialize))]
-#[derive(Clone, Debug, Default)]
+#[derive(Clone, Debug)]
 /// A container for data associated to item existing into another Arena.
 pub struct Coarena<T> {
     data: Vec<(u32, T)>,
@@ -139,5 +139,11 @@ impl<T> Coarena<T> {
         }
 
         (&mut elt1.1, &mut elt2.1)
+    }
+}
+
+impl<T> Default for Coarena<T> {
+    fn default() -> Self {
+        Self::new()
     }
 }
